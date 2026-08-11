@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'member_registration_location_screen.dart';
 
 class SelectOptionScreen extends StatelessWidget {
   const SelectOptionScreen({super.key});
@@ -9,10 +10,8 @@ class SelectOptionScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Select Option'),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(24.0),
-
         child: Column(
           children: [
             const SizedBox(height: 30),
@@ -27,24 +26,26 @@ class SelectOptionScreen extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Member Container
+            // Member
             GestureDetector(
               onTap: () {
-                // Member screen will be added later.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const MemberRegistrationLocationScreen(),
+                  ),
+                );
               },
-
               child: Container(
                 width: double.infinity,
                 height: 180,
-
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: Colors.grey,
-                    width: 1,
                   ),
                 ),
-
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -54,9 +55,7 @@ class SelectOptionScreen extends StatelessWidget {
                       height: 90,
                       fit: BoxFit.contain,
                     ),
-
                     const SizedBox(height: 10),
-
                     const Text(
                       'Member',
                       style: TextStyle(
@@ -71,24 +70,20 @@ class SelectOptionScreen extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // Association Container
+            // Association
             GestureDetector(
               onTap: () {
-                // Association screen will be added later.
+                // Association registration will be added next.
               },
-
               child: Container(
                 width: double.infinity,
                 height: 180,
-
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: Colors.grey,
-                    width: 1,
                   ),
                 ),
-
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -98,9 +93,7 @@ class SelectOptionScreen extends StatelessWidget {
                       height: 90,
                       fit: BoxFit.contain,
                     ),
-
                     const SizedBox(height: 10),
-
                     const Text(
                       'Association',
                       style: TextStyle(

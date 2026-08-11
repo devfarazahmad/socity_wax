@@ -8,55 +8,69 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Logo
-            Image.asset(
-              'assets/images/society_wax_logo.jpg',
-              width: 120,
-              height: 120,
-              fit: BoxFit.contain,
-            ),
-
-            const SizedBox(height: 20),
-
-            // App Name
-            const Text(
-              'SocityWax',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Logo
+              Image.asset(
+                'assets/images/society_wax_logo.jpg',
+                width: 120,
+                height: 120,
+                fit: BoxFit.contain,
               ),
-            ),
 
-            const SizedBox(height: 8),
+              const SizedBox(height: 20),
 
-            // Campus Name
-            const Text(
-              'HayatianCampus',
-              style: TextStyle(
-                fontSize: 16,
+              // App Name
+              const Text(
+                'SocityWax',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
 
-            const SizedBox(height: 30),
+              const SizedBox(height: 8),
 
-            // Let's Get Started Button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
+              // Campus Name
+              const Text(
+                'HayatianCampus',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // Let's Get Started Button
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
                   ),
-                );
-              },
-              child: const Text(
-                "Let's Get Started",
+                  child: const Text(
+                    "Let's Get Started",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
