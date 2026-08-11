@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+
+class SelectOptionScreen extends StatelessWidget {
+  const SelectOptionScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select Option'),
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+
+            const Text(
+              'Select Option',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // Member Container
+            GestureDetector(
+              onTap: () {
+                // Member screen will be added later.
+              },
+
+              child: Container(
+                width: double.infinity,
+                height: 180,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1,
+                  ),
+                ),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/society_wax_logo.jpg',
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.contain,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    const Text(
+                      'Member',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            // Association Container
+            GestureDetector(
+              onTap: () {
+                // Association screen will be added later.
+              },
+
+              child: Container(
+                width: double.infinity,
+                height: 180,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1,
+                  ),
+                ),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/society_wax_logo.jpg',
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.contain,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    const Text(
+                      'Association',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
