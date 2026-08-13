@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socity_wax/screens/association/association_registration_location_screen.dart';
 import 'member_registration_location_screen.dart';
 
 class SelectOptionScreen extends StatelessWidget {
@@ -73,7 +74,15 @@ class SelectOptionScreen extends StatelessWidget {
             // Association
             GestureDetector(
               onTap: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const AssociationRegistrationLocationScreen(),
+                  ),
+                );
                 // Association registration will be added next.
+                
               },
               child: Container(
                 width: double.infinity,
