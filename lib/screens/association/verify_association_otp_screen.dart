@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'community_selection_screen.dart';
+import '../socity_dashbord/community_selection_screen.dart';
 
 class VerifyAssociationOtpScreen extends StatefulWidget {
   const VerifyAssociationOtpScreen({super.key});
