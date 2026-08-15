@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:socity_wax/screens/Bottom%20navigationbar/classified_screen.dart';
 import 'package:socity_wax/screens/Bottom%20navigationbar/home_screen.dart';
 import 'package:socity_wax/screens/Bottom%20navigationbar/news_screen.dart';
 import 'package:socity_wax/screens/Bottom%20navigationbar/survey_screen.dart';
+
+import 'package:socity_wax/screens/socity_dashbord/all_sponsors_screen.dart';
+import 'package:socity_wax/screens/socity_dashbord/all_events_screen.dart';
+import 'package:socity_wax/screens/socity_dashbord/all_donors_screen.dart';
+import 'package:socity_wax/screens/socity_dashbord/all_committee_members_screen.dart';
+import 'package:socity_wax/screens/socity_dashbord/create_event_screen.dart';
+
 import 'package:socity_wax/screens/socity_dashbord/committee_member_detail_screen.dart';
 import 'package:socity_wax/screens/socity_dashbord/donor_detail_screen.dart';
 import 'package:socity_wax/screens/socity_dashbord/event_detail_screen.dart';
@@ -10,8 +18,6 @@ import 'package:socity_wax/screens/socity_dashbord/feedback_screen.dart';
 import 'package:socity_wax/screens/socity_dashbord/gallery_detail_screen.dart';
 import 'package:socity_wax/screens/socity_dashbord/profile_screen.dart';
 import 'package:socity_wax/screens/socity_dashbord/sponsor_detail_screen.dart';
-
-
 
 class CommunitySelectionScreen extends StatefulWidget {
   const CommunitySelectionScreen({super.key});
@@ -120,6 +126,10 @@ class _CommunitySelectionScreenState
     },
   ];
 
+  // ==========================================================
+  // BOTTOM NAVIGATION
+  // ==========================================================
+
   void _changeBottomNavigation(int index) {
     setState(() {
       _selectedBottomIndex = index;
@@ -152,18 +162,67 @@ class _CommunitySelectionScreenState
     );
   }
 
+  // ==========================================================
+  // NAVIGATION HELPERS
+  // ==========================================================
+
+  void _openAllSponsors() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AllSponsorsScreen(),
+      ),
+    );
+  }
+
+  void _openAllEvents() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AllEventsScreen(),
+      ),
+    );
+  }
+
+  void _openAllDonors() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AllDonorsScreen(),
+      ),
+    );
+  }
+
+  void _openAllCommitteeMembers() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AllCommitteeMembersScreen(),
+      ),
+    );
+  }
+
+  void _createEvent() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const CreateEventScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
-      // --------------------------------------------------
+      // ======================================================
       // APP BAR
-      // --------------------------------------------------
+      // ======================================================
+
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
-
         title: Row(
           children: [
             const CircleAvatar(
@@ -186,7 +245,6 @@ class _CommunitySelectionScreenState
               ),
             ),
 
-            // Search
             IconButton(
               onPressed: () {
                 showSearch(
@@ -200,7 +258,6 @@ class _CommunitySelectionScreenState
               ),
             ),
 
-            // Notification
             IconButton(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -215,7 +272,6 @@ class _CommunitySelectionScreenState
               ),
             ),
 
-            // Profile
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -236,28 +292,27 @@ class _CommunitySelectionScreenState
         ),
       ),
 
-      // --------------------------------------------------
+      // ======================================================
       // BODY
-      // --------------------------------------------------
+      // ======================================================
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            // --------------------------------------------------
-            // USER INFORMATION
-            // --------------------------------------------------
             _buildUserCard(),
 
             const SizedBox(height: 20),
 
-            // --------------------------------------------------
+            // =================================================
             // UPCOMING EVENTS
-            // --------------------------------------------------
+            // =================================================
+
             _sectionTitle(
               'Upcoming Events',
               showAll: true,
+              onShowAll: _openAllEvents,
             ),
 
             const SizedBox(height: 10),
@@ -278,60 +333,61 @@ class _CommunitySelectionScreenState
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // NOTICE BOARD
-            // --------------------------------------------------
+            // =================================================
+
             _buildNoticeBoard(),
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // SPONSORS
-            // --------------------------------------------------
+            // =================================================
+
             _buildSponsorsSection(),
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // EVENTS
-            // --------------------------------------------------
+            // =================================================
+
             _buildEventsSection(),
 
             const SizedBox(height: 20),
 
-            // Create Event
+            // =================================================
+            // CREATE EVENT
+            // =================================================
+
             _orangeButton(
               text: 'Create an Event',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const EventDetailScreen(),
-                  ),
-                );
-              },
+              onPressed: _createEvent,
             ),
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // DONORS
-            // --------------------------------------------------
+            // =================================================
+
             _buildDonorsSection(),
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // COMMITTEE MEMBERS
-            // --------------------------------------------------
+            // =================================================
+
             _buildCommitteeSection(),
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // GALLERY
-            // --------------------------------------------------
+            // =================================================
+
             _buildGallerySection(),
 
             const SizedBox(height: 20),
@@ -351,9 +407,10 @@ class _CommunitySelectionScreenState
 
             const SizedBox(height: 25),
 
-            // --------------------------------------------------
+            // =================================================
             // FEEDBACK
-            // --------------------------------------------------
+            // =================================================
+
             _buildFeedbackSection(),
 
             const SizedBox(height: 20),
@@ -361,37 +418,32 @@ class _CommunitySelectionScreenState
         ),
       ),
 
-      // --------------------------------------------------
+      // ======================================================
       // BOTTOM NAVIGATION
-      // --------------------------------------------------
+      // ======================================================
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedBottomIndex,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
-
         type: BottomNavigationBarType.fixed,
-
         onTap: _changeBottomNavigation,
-
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.newspaper_outlined),
             activeIcon: Icon(Icons.newspaper),
             label: 'News',
           ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.class_outlined),
             activeIcon: Icon(Icons.class_),
             label: 'Classified',
           ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.poll_outlined),
             activeIcon: Icon(Icons.poll),
@@ -410,7 +462,6 @@ class _CommunitySelectionScreenState
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
-
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -418,7 +469,6 @@ class _CommunitySelectionScreenState
           color: Colors.grey.shade200,
         ),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -443,16 +493,14 @@ class _CommunitySelectionScreenState
 
           const SizedBox(height: 12),
 
-          Row(
-            children: const [
+          const Row(
+            children: [
               Icon(
                 Icons.calendar_month_outlined,
                 size: 18,
                 color: Colors.grey,
               ),
-
               SizedBox(width: 7),
-
               Text(
                 'Member since 15 January 2024',
                 style: TextStyle(
@@ -483,12 +531,10 @@ class _CommunitySelectionScreenState
           ),
         );
       },
-
       child: Container(
         width: 280,
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.all(15),
-
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
@@ -496,18 +542,15 @@ class _CommunitySelectionScreenState
             color: Colors.grey.shade200,
           ),
         ),
-
         child: Row(
           children: [
             Container(
               width: 50,
               height: 50,
-
               decoration: BoxDecoration(
                 color: Colors.orange,
                 borderRadius: BorderRadius.circular(10),
               ),
-
               child: const Icon(
                 Icons.event,
                 color: Colors.white,
@@ -518,10 +561,8 @@ class _CommunitySelectionScreenState
 
             Expanded(
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                mainAxisAlignment:
-                    MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     event['title']!,
@@ -567,152 +608,127 @@ class _CommunitySelectionScreenState
   // NOTICE BOARD
   // ==========================================================
 
-
-         // ==========================================================
-// NOTICE BOARD
-// ==========================================================
-
-Widget _buildNoticeBoard() {
-  return _whiteContainer(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Notice Board',
-          style: TextStyle(
-            fontSize: 21,
-            fontWeight: FontWeight.bold,
+  Widget _buildNoticeBoard() {
+    return _whiteContainer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Notice Board',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
 
-        const SizedBox(height: 20),
+          const SizedBox(height: 20),
 
-        // Event 1
-        _noticeItem(
-          date: '20 August 2026',
-          title: 'Annual Community Gathering at Hayatian Campus',
-          description:
-              'Interested people can join via the link below.',
-          isLast: false,
-        ),
-
-        // Event 2
-        _noticeItem(
-          date: '25 August 2026',
-          title: 'Annual Sports Gala at University Ground',
-          description:
-              'Interested people can join via the link below.',
-          isLast: false,
-        ),
-
-        // Event 3
-        _noticeItem(
-          date: '30 August 2026',
-          title: 'Community Dinner at Community Hall',
-          description:
-              'Interested people can join via the link below.',
-          isLast: true,
-        ),
-      ],
-    ),
-  );
-}
-
-
-// ==========================================================
-// NOTICE BOARD ITEM
-// ==========================================================
-
-Widget _noticeItem({
-  required String date,
-  required String title,
-  required String description,
-  required bool isLast,
-}) {
-  return IntrinsicHeight(
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // --------------------------------------------------
-        // LEFT TIMELINE
-        // --------------------------------------------------
-        SizedBox(
-          width: 25,
-          child: Column(
-            children: [
-              // Orange Circle
-              Container(
-                width: 12,
-                height: 12,
-                decoration: const BoxDecoration(
-                  color: Colors.orange,
-                  shape: BoxShape.circle,
-                ),
-              ),
-
-              // Vertical Line
-              if (!isLast)
-                Expanded(
-                  child: Container(
-                    width: 2,
-                    color: Colors.orange,
-                  ),
-                ),
-            ],
+          _noticeItem(
+            date: '20 August 2026',
+            title: 'Annual Community Gathering at Hayatian Campus',
+            description:
+                'Interested people can join via the link below.',
+            isLast: false,
           ),
-        ),
 
-        const SizedBox(width: 10),
+          _noticeItem(
+            date: '25 August 2026',
+            title: 'Annual Sports Gala at University Ground',
+            description:
+                'Interested people can join via the link below.',
+            isLast: false,
+          ),
 
-        // --------------------------------------------------
-        // EVENT DETAILS
-        // --------------------------------------------------
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 25),
+          _noticeItem(
+            date: '30 August 2026',
+            title: 'Community Dinner at Community Hall',
+            description:
+                'Interested people can join via the link below.',
+            isLast: true,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _noticeItem({
+    required String date,
+    required String title,
+    required String description,
+    required bool isLast,
+  }) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 25,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Date
-                Text(
-                  date,
-                  style: const TextStyle(
-                    fontSize: 13,
+                Container(
+                  width: 12,
+                  height: 12,
+                  decoration: const BoxDecoration(
                     color: Colors.orange,
-                    fontWeight: FontWeight.w500,
+                    shape: BoxShape.circle,
                   ),
                 ),
 
-                const SizedBox(height: 6),
-
-                // Main Event Text
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                if (!isLast)
+                  Expanded(
+                    child: Container(
+                      width: 2,
+                      color: Colors.orange,
+                    ),
                   ),
-                ),
-
-                const SizedBox(height: 6),
-
-                // Description
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
               ],
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+
+          const SizedBox(width: 10),
+
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 25),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    date,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.orange,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   // ==========================================================
   // SPONSORS
@@ -726,7 +742,7 @@ Widget _noticeItem({
           _sectionTitle(
             'Sponsors',
             showAll: true,
-            onShowAll: () {},
+            onShowAll: _openAllSponsors,
           ),
 
           const SizedBox(height: 5),
@@ -754,7 +770,7 @@ Widget _noticeItem({
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const SponsorDetailScreen(),
+                            const SponsorDetailScreen(name: '', phone: '', company: '', image: '',),
                       ),
                     );
                   },
@@ -771,131 +787,116 @@ Widget _noticeItem({
   // EVENTS
   // ==========================================================
 
-// ==========================================================
-// EVENTS
-// ==========================================================
+  Widget _buildEventsSection() {
+    return _whiteContainer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _sectionTitle(
+            'Events',
+            showAll: true,
+            onShowAll: _openAllEvents,
+          ),
 
-Widget _buildEventsSection() {
-  return _whiteContainer(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _sectionTitle(
-          'Events',
-          showAll: true,
-        ),
+          const SizedBox(height: 15),
 
-        const SizedBox(height: 15),
-
-        SizedBox(
-          height: 230,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const EventDetailScreen(),
-                    ),
-                  );
-                },
-
-                child: Container(
-                  width: 220,
-                  margin: const EdgeInsets.only(right: 12),
-
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-
-                    // Using your existing image
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        'assets/images/society_wax_logo.jpg',
+          SizedBox(
+            height: 230,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const EventDetailScreen(),
                       ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-
+                    );
+                  },
                   child: Container(
-                    padding: const EdgeInsets.all(15),
-
+                    width: 220,
+                    margin: const EdgeInsets.only(right: 12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.3),
-                          Colors.black.withOpacity(0.8),
-                        ],
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/society_wax_logo.jpg',
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
-
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Date
-                        Row(
-                          children: const [
-                            Icon(
-                              Icons.calendar_month,
-                              color: Colors.white,
-                            ),
-
-                            SizedBox(width: 5),
-
-                            Text(
-                              '20 Aug 2026',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.3),
+                            Colors.black.withOpacity(0.8),
                           ],
                         ),
-
-                        // Event information
-                        Row(
-                          children: const [
-                            Expanded(
-                              child: Text(
-                                'Annual Community Event\n'
-                                'Hayatian Campus',
+                      ),
+                      child: Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_month,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                '20 Aug 2026',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
+                            ],
+                          ),
 
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ],
-                        ),
-                      ],
+                          const Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Annual Community Event\n'
+                                  'Hayatian Campus',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
-      
   // ==========================================================
   // DONORS
   // ==========================================================
@@ -908,6 +909,7 @@ Widget _buildEventsSection() {
           _sectionTitle(
             'Donors',
             showAll: true,
+            onShowAll: _openAllDonors,
           ),
 
           const SizedBox(height: 5),
@@ -933,7 +935,7 @@ Widget _buildEventsSection() {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const DonorDetailScreen(),
+                            const DonorDetailScreen(name: '', phone: '', club: '', image: '',),
                       ),
                     );
                   },
@@ -941,16 +943,13 @@ Widget _buildEventsSection() {
                     width: 150,
                     margin: const EdgeInsets.only(right: 12),
                     padding: const EdgeInsets.all(10),
-
                     decoration: BoxDecoration(
                       color: Colors.grey.shade50,
-                      borderRadius:
-                          BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: Colors.grey.shade200,
                       ),
                     ),
-
                     child: Column(
                       children: [
                         CircleAvatar(
@@ -1004,6 +1003,7 @@ Widget _buildEventsSection() {
           _sectionTitle(
             'Committee Member',
             showAll: true,
+            onShowAll: _openAllCommitteeMembers,
           ),
 
           const SizedBox(height: 5),
@@ -1031,7 +1031,7 @@ Widget _buildEventsSection() {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const CommitteeMemberDetailScreen(),
+                            const CommitteeMemberDetailScreen(name: '', phone: '', position: '', image: '',),
                       ),
                     );
                   },
@@ -1097,12 +1097,9 @@ Widget _buildEventsSection() {
                     ),
                   );
                 },
-
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(10),
-
+                    borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       image: AssetImage(
                         gallery[index]['image']!,
@@ -1110,14 +1107,10 @@ Widget _buildEventsSection() {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                   child: Container(
                     padding: const EdgeInsets.all(8),
-
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(10),
-
+                      borderRadius: BorderRadius.circular(10),
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -1127,9 +1120,7 @@ Widget _buildEventsSection() {
                         ],
                       ),
                     ),
-
                     alignment: Alignment.bottomLeft,
-
                     child: Text(
                       gallery[index]['title']!,
                       style: const TextStyle(
@@ -1157,8 +1148,8 @@ Widget _buildEventsSection() {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: const [
+          const Row(
+            children: [
               Icon(
                 Icons.feedback_outlined,
                 color: Colors.orange,
@@ -1209,7 +1200,7 @@ Widget _buildEventsSection() {
   }
 
   // ==========================================================
-  // COMMON WIDGETS
+  // COMMON CONTAINER
   // ==========================================================
 
   Widget _whiteContainer({
@@ -1218,7 +1209,6 @@ Widget _buildEventsSection() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
-
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -1226,10 +1216,13 @@ Widget _buildEventsSection() {
           color: Colors.grey.shade200,
         ),
       ),
-
       child: child,
     );
   }
+
+  // ==========================================================
+  // SECTION TITLE
+  // ==========================================================
 
   Widget _sectionTitle(
     String title, {
@@ -1263,6 +1256,10 @@ Widget _buildEventsSection() {
     );
   }
 
+  // ==========================================================
+  // PERSON CARD
+  // ==========================================================
+
   Widget _personCard({
     required String image,
     required String name,
@@ -1270,12 +1267,10 @@ Widget _buildEventsSection() {
   }) {
     return GestureDetector(
       onTap: onTap,
-
       child: Container(
         width: 120,
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.all(10),
-
         decoration: BoxDecoration(
           color: Colors.grey.shade50,
           borderRadius: BorderRadius.circular(12),
@@ -1283,7 +1278,6 @@ Widget _buildEventsSection() {
             color: Colors.grey.shade200,
           ),
         ),
-
         child: Column(
           children: [
             CircleAvatar(
@@ -1298,7 +1292,6 @@ Widget _buildEventsSection() {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -1310,6 +1303,10 @@ Widget _buildEventsSection() {
     );
   }
 
+  // ==========================================================
+  // ORANGE BUTTON
+  // ==========================================================
+
   Widget _orangeButton({
     required String text,
     required VoidCallback onPressed,
@@ -1317,20 +1314,16 @@ Widget _buildEventsSection() {
     return SizedBox(
       width: double.infinity,
       height: 50,
-
       child: ElevatedButton(
         onPressed: onPressed,
-
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.orange,
           foregroundColor: Colors.white,
           elevation: 5,
-
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-
         child: Text(
           text,
           style: const TextStyle(
@@ -1344,7 +1337,7 @@ Widget _buildEventsSection() {
 }
 
 // ==========================================================
-// SEARCH
+// SEARCH DELEGATE
 // ==========================================================
 
 class DashboardSearchDelegate
